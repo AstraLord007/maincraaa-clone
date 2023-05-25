@@ -4,6 +4,9 @@ import { Vector3 } from 'three';
 import { useEffect, useRef } from 'react';
 import { useKeyboard } from '../hooks/useKeyboard';
 
+const CHARACTER_SPEED = 4;
+const CHARACTER_JUMP_FORCE = 4;
+
 export const Player = () => {
     const {
         moveForward,
@@ -43,7 +46,39 @@ export const Player = () => {
                 pos.current[2]
             )
         )
-        api.velocity.set(0, 0, -1)
+        const direction = new Vector3()
+
+        const frontVector = new Vector3(
+            0,
+            0,
+            (moveBackward ? 1 : 0) - (moveForward ? 1 : 0)
+        )
+
+        const sideVector = new Vector3(
+            (moveLeft ? 1 : 0) - (moveRight ? 1 : 0),
+            0,
+            0
+        )
+
+        direction
+            .subVectors(frontVector, sideVector)
+            .normalize()
+            .multiplyScalar(CHARACTER_SPEED)
+            .applyEuler(camera.rotation)
+        
+        api.velocity.set(
+            direction.x,
+            vel.current[1],
+            direction.z
+        )
+
+        if(jump) {
+            api.velocity.set(
+                vel.current[0],
+                CHARACTER_JUMP_FORCE,
+                vel.current[2]
+            )
+        }
     })
 
     return (
