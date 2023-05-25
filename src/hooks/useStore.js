@@ -8,8 +8,20 @@ import { nanoid } from 'nanoid';
         pos: [1, 1, 1],
         texture: 'dirt'
     }],
-    addCube: () => {},
-    removeCube: () => {},
+    addCube: (x, y, z) => {
+        set(state => ({
+            cubes: [...state.cubes, {
+                id: nanoid(),
+                texture: state.texture,
+                pos: [x, y, z]
+            }]
+        }))
+    },
+    removeCube: (id) => {
+        set(state => ({
+            cubes: state.cubes.filter(cube => cube.id !== id)
+        }))
+    },
     setTexture: () => {},
     saveWorld: () => {},
     resetWorld: () => {}
