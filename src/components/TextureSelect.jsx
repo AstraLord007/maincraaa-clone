@@ -4,7 +4,7 @@ import { useKeyboard } from '../hooks/useKeyboard';
 import { useEffect, useState } from 'react';
 
 export const TextureSelector = () => {
-    const [visible, setVisible] = useState(false)
+    const [visible, setVisible] = useState(true)
     const [texture, setTexture] = useStore(state => [state.texture, state.setTexture])
     
     const {
@@ -38,16 +38,17 @@ export const TextureSelector = () => {
     if(!visible) return null
 
     return (
-        <div>
+        <div className='texture-selector'>
             {
-                Object.entries(images).map(([textureName, texture]) => {
-                    return (
-                        <img
-                            key={textureName}
-                            src={texture}
-                            alt={textureName}
-                            onClick={() => setTexture(textureName)}
-                        />
+                Object
+                    .entries(images)
+                    .map(([imgKey, img]) => {
+                        return (
+                            <img
+                                key={imgKey}
+                                src={img}
+                                alt={imgKey}
+                            />
                     )
                 })
             }
