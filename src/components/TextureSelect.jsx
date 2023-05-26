@@ -15,6 +15,18 @@ export const TextureSelector = () => {
         log
     } = useKeyboard()
 
+    // useEffect(() => {
+    //     const visibilityTimeout = setTimeout(() => {
+    //         setVisible(false)
+    //     }, 1000)
+
+    //     setVisible(true)
+
+    //     return() => {
+    //         clearTimeout(visibilityTimeout)
+    //     }
+    // }, [texture])
+
     useEffect(() => {
         const options = {
             dirt,
@@ -34,8 +46,6 @@ export const TextureSelector = () => {
         }
 
     }, [dirt, grass, glass, wood, log])
-    
-    if(!visible) return null
 
     return (
         <div className='texture-selector'>
@@ -45,6 +55,7 @@ export const TextureSelector = () => {
                     .map(([imgKey, img]) => {
                         return (
                             <img
+                            className={texture === imgKey.replace('Img', '') ? 'selected' : ''}
                                 key={imgKey}
                                 src={img}
                                 alt={imgKey}

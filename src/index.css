@@ -35,20 +35,24 @@ body {
 }
 
 .texture-selector {
+  bottom: 32px;
   background-color: #aaa;
-  padding: 16px;
-  border: 5px solid #000;
+  padding: 8px;
+  border: 3px solid #000;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  left:50%;
+  transform: translate(-50%);
   display: flex;
-  gap: 16px;
+  gap: 8px;
 }
 
 .texture-selector img {
-  width: 100px;
+  width: 65px;
   z-index: 100;
   image-rendering: pixelated;
-  border: 5px solid #000;
+  border: 3px solid #000;
+}
+
+.texture-selector img.selected {
+  border-color: white;
 }
