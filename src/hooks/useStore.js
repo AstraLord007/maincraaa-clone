@@ -22,7 +22,9 @@ import { nanoid } from 'nanoid';
             cubes: state.cubes.filter(cube => cube.id !== id)
         }))
     },
-    setTexture: () => {},
+    setTexture: (texture) => {
+        set(() => ({texture}))
+    },
     saveWorld: () => {},
     resetWorld: () => {}
  }))
